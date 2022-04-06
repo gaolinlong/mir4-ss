@@ -35,7 +35,10 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           docker rmi `docker images -q`
-          sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
+          sudo apt-get clean
+          sudo apt-get update
+          sudo dpkg --purge mysql\*
+          sudo apt install mysql-common --reinstall
           sudo dpkg --purge mysql-common
           sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
           sudo -E apt-get update
